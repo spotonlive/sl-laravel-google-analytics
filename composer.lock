@@ -4,124 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "019ccfb6b2662c8c83a3821e119480b2",
-    "content-hash": "53cc12c93431136b26c7abd43bb025c9",
+    "hash": "71a66c803ca2603210fe00d203e1a4c7",
+    "content-hash": "168649cd94a4e5b29c2f9298fe3e0b56",
     "packages": [
         {
-            "name": "widop/google-analytics",
-            "version": "1.0.0",
+            "name": "google/apiclient",
+            "version": "1.1.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/widop/google-analytics.git",
-                "reference": "b8c7f0d15dab31e94350c35f2a3dc1cf6aab4ac9"
+                "url": "https://github.com/google/google-api-php-client.git",
+                "reference": "2bc00ec4e8fa1a5eec793d800fac339f30b730db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/widop/google-analytics/zipball/b8c7f0d15dab31e94350c35f2a3dc1cf6aab4ac9",
-                "reference": "b8c7f0d15dab31e94350c35f2a3dc1cf6aab4ac9",
+                "url": "https://api.github.com/repos/google/google-api-php-client/zipball/2bc00ec4e8fa1a5eec793d800fac339f30b730db",
+                "reference": "2bc00ec4e8fa1a5eec793d800fac339f30b730db",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
-                "widop/http-adapter": "1.0.*"
+                "php": ">=5.2.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Widop\\GoogleAnalytics": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Eric GELOEN",
-                    "email": "geloen.eric@gmail.com"
-                },
-                {
-                    "name": "Widop",
-                    "email": "contact@widop.com"
-                }
-            ],
-            "description": "Google certificate-based authentication in server-to-server interactions with google analytics",
-            "keywords": [
-                "analytics",
-                "google",
-                "server"
-            ],
-            "time": "2013-09-22 11:44:02"
-        },
-        {
-            "name": "widop/http-adapter",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/widop/http-adapter.git",
-                "reference": "0a30815a70de92e24d9c08af4494730a25cad5d2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/widop/http-adapter/zipball/0a30815a70de92e24d9c08af4494730a25cad5d2",
-                "reference": "0a30815a70de92e24d9c08af4494730a25cad5d2",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "ext-curl": "*",
-                "guzzle/guzzle": "*",
-                "kriswallsmith/buzz": "*",
                 "phpunit/phpunit": "3.7.*",
-                "zendframework/zend-http": "*"
-            },
-            "suggest": {
-                "ext-curl": "Allows you to use cURL adapter",
-                "guzzle/guzzle": "Allows you to use Guzzle adapter",
-                "kriswallsmith/buzz": "Allows you to use Buzz adapter",
-                "zendframework/zend-http": "Allows you to use Zend adapter"
+                "squizlabs/php_codesniffer": "~2.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Widop\\HttpAdapter": "src/"
-                }
+                "classmap": [
+                    "src/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "Apache-2.0"
             ],
-            "authors": [
-                {
-                    "name": "Eric GELOEN",
-                    "email": "geloen.eric@gmail.com"
-                },
-                {
-                    "name": "Widop",
-                    "email": "contact@widop.com"
-                }
-            ],
-            "description": "Issue HTTP request.",
+            "description": "Client library for Google APIs",
+            "homepage": "http://developers.google.com/api-client-library/php",
             "keywords": [
-                "http",
-                "request"
+                "google"
             ],
-            "time": "2013-10-30 15:38:45"
+            "time": "2015-09-23 04:19:33"
         }
     ],
     "packages-dev": [

@@ -2,13 +2,13 @@
 
 namespace SpotOnLive\GoogleAnalytics\Services;
 
+use DateTime;
+use SpotOnLive\GoogleAnalytics\Adapters\Auth\AuthAdapterInterface;
+use SpotOnLive\GoogleAnalytics\Exceptions\InvalidAdapterException;
 use SpotOnLive\GoogleAnalytics\Exceptions\InvalidProviderException;
 use SpotOnLive\GoogleAnalytics\Options\AnalyticsServiceOptions;
-use Widop\HttpAdapter\CurlHttpAdapter;
-use Widop\GoogleAnalytics\Service;
-use Widop\GoogleAnalytics\Client;
 
-class AnalyticsService
+class AnalyticsService implements AnalyticsServiceInterface
 {
     /** @var AnalyticsServiceOptions */
     protected $options;
@@ -16,8 +16,8 @@ class AnalyticsService
     /** @var null|array */
     protected $provider = null;
 
-    /** @var null|Service */
-    protected $service = null;
+    /** @var null|string */
+    protected $siteId = null;
 
     /**
      * @param array $config
@@ -28,37 +28,62 @@ class AnalyticsService
     }
 
     /**
-     * Get service
+     * Get visits
      *
-     * @return Service
+     * @param DateTime $start
+     * @param DateTime $end
+     * @return integer
      */
-    public function getService()
+    public function getVisits(DateTime $start, DateTime $end)
     {
-        if (! is_null($this->service)) {
-            return $this->service;
-        }
-
-        $client = $this->getClient();
-        $service = new Service($client);
-
-        $this->service = $service;
-
-        return $service;
     }
 
     /**
      * Get client
      *
-     * @return Client
+     * @throws InvalidAdapterException
      */
     protected function getClient()
     {
-        $provider = $this->getProvider();
+        $provider = $this->provider;
+        $adapter = $this->getAdapter($provider);
+    }
 
-        $httpAdapter = new CurlHttpAdapter();
-        $client = new Client($provider['clientId'], $provider['certificate'], $httpAdapter);
+    /**
+     * Get adapter from provider
+     *
+     * @param array $provider
+     * @return AuthAdapterInterface
+     * @throws InvalidAdapterException
+     */
+    protected function getAdapter(array $provider)
+    {
+        /** @var string $adapterName */
+        $adapterName = $provider['auth'];
 
-        return $client;
+        if (! class_exists($adapterName)) {
+            throw new InvalidAdapterException(
+                sprintf(
+                    'The adapter class \'%s\' was not found',
+                    $adapterName
+                )
+            );
+        }
+
+        /** @var AuthAdapterInterface $adapter */
+        $adapter = new $adapterName;
+
+        if (! $adapter instanceof AuthAdapterInterface) {
+            throw new InvalidAdapterException(
+                sprintf(
+                    'The adapter class \'%s\' must be an instance of \'%s\'',
+                    $adapterName,
+                    AuthAdapterInterface::class
+                )
+            );
+        }
+
+        return $adapter;
     }
 
     /**
@@ -111,5 +136,21 @@ class AnalyticsService
     public function getProviders()
     {
         return $this->options->get('providers');
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getSiteId()
+    {
+        return $this->siteId;
+    }
+
+    /**
+     * @param null|string $siteId
+     */
+    public function setSiteId($siteId)
+    {
+        $this->siteId = $siteId;
     }
 }

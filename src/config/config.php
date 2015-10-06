@@ -17,12 +17,12 @@ return [
             /*
              * Your client ID
              */
-            'clientId' => '',
+            'clientId' => env('ANALYTICS_CLIENT_ID'),
 
             /*
              * Service e-mail
              */
-            'serviceEmail' => '',
+            'serviceEmail' => env('ANALYTICS_SERVICE_EMAIL'),
 
             /*
              * Upload your google analytics p12-certificate
